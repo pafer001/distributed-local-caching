@@ -1,4 +1,4 @@
-package com.pafer.distributed.local.cache.mq.client;
+package com.pafer.distributed.local.cache.mq;
 
 import com.rabbitmq.client.Address;
 import com.rabbitmq.client.Channel;

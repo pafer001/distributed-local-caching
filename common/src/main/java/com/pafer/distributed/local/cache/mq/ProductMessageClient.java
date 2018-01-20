@@ -1,4 +1,4 @@
-package com.pafer.distributed.local.cache.mq.client;
+package com.pafer.distributed.local.cache.mq;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
@@ -45,6 +45,14 @@ public class ProductMessageClient extends AbstractMessageClient {
             }
         });
 
+    }
+
+    /**
+     * send delete lc message
+     * @param key
+     */
+    public void sendRemoveDataMessage(String key) throws IOException{
+        sendMessage(key);
     }
 
 }

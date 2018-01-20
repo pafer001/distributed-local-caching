@@ -1,6 +1,5 @@
-package com.pafer.distributed.local.cache.mq.client;
+package com.pafer.distributed.local.cache.mq;
 
-import com.pafer.distributed.local.cache.lc.LocalCacheConfiguration;
 import com.pafer.distributed.local.cache.lc.LocalCacheHandler;
 import com.rabbitmq.client.*;
 

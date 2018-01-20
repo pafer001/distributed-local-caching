@@ -1,6 +1,5 @@
 package com.pafer.distributed.local.cache.mq.client;
 
-import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
 
@@ -20,27 +19,32 @@ public class ProductMessageClient extends AbstractMessageClient {
 
     private static Channel channel;
 
-    private void initProducer() throws IOException {
 
-        channel = createChannel();
-        channel.exchangeDeclare(exchangeName, "fanout", true);
-    }
-
-    public void sendMessage(Object object) throws IOException {
-
+    public ProductMessageClient() throws IOException {
         if (channel == null) {
             synchronized (this) {
                 if (channel == null) {
-                    initProducer();
+                    channel = createChannel();
+                    channel.exchangeDeclare(exchangeName, "fanout", true);
                 }
             }
         }
-        if (object == null) {
-            return;
-        }
-        Gson gson = new Gson();
-        channel.basicPublish(exchangeName, routingKey,
-                MessageProperties.PERSISTENT_TEXT_PLAIN, gson.toJson(object).getBytes());
+    }
+
+    public void sendMessage(final String key) throws IOException {
+
+        threadPoolExecutor.execute(new Runnable() {
+            public void run() {
+                try {
+                    channel.basicPublish(exchangeName, routingKey,
+                            MessageProperties.PERSISTENT_TEXT_PLAIN, key.getBytes());
+                } catch (Exception e) {
+
+                }
+
+            }
+        });
+
     }
 
 }

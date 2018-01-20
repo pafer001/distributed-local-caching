@@ -20,6 +20,46 @@ public abstract class AbstractMessageClient {
     protected String routingKey = "lc-routingKey";
     protected Address[] address;
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public String getvHost() {
+        return vHost;
+    }
+
+    public void setvHost(String vHost) {
+        this.vHost = vHost;
+    }
+
+    public String getQueueName() {
+        return queueName;
+    }
+
+    public void setQueueName(String queueName) {
+        this.queueName = queueName;
+    }
+
+    public Address[] getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address[] address) {
+        this.address = address;
+    }
+
     protected Connection createConnect() throws IOException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername(user);

@@ -11,11 +11,30 @@ public class ConsumerMessageClient extends AbstractMessageClient {
 
     protected int prefetchCount;
 
+    public int getPrefetchCount() {
+        return prefetchCount;
+    }
+
+    public void setPrefetchCount(int prefetchCount) {
+        this.prefetchCount = prefetchCount;
+    }
+
+    public ConsumerMessageClient() throws IOException{
+
+        if (channel == null) {
+            synchronized (this) {
+                if (channel == null) {
+                    channel = createChannel();
+                }
+            }
+        }
+    }
+
     public void consumer() throws IOException {
         if (channel == null) {
             synchronized (this) {
                 if (channel == null) {
-                    createChannel();
+                    channel = createChannel();
                 }
             }
         }

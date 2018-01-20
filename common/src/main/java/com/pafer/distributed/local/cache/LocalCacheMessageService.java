@@ -10,9 +10,15 @@ import java.io.IOException;
  */
 public class LocalCacheMessageService {
 
-    private ProductMessageClient  productMessageClient = new ProductMessageClient();
+    private ProductMessageClient  productMessageClient ;
 
-    private LocalCacheHandler handler = new LocalCacheHandler();
+    private LocalCacheHandler handler ;
+
+    public LocalCacheMessageService() throws IOException {
+
+        productMessageClient = new ProductMessageClient();
+        handler = new LocalCacheHandler();
+    }
 
     /**
      * send delete lc message

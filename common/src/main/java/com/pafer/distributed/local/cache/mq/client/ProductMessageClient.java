@@ -20,7 +20,7 @@ public class ProductMessageClient extends AbstractMessageClient {
     private static Channel channel;
 
 
-    public ProductMessageClient() throws IOException {
+    public ProductMessageClient(LocalCacheClientConfiguration localCacheClientConfiguration) throws IOException {
         if (channel == null) {
             synchronized (this) {
                 if (channel == null) {

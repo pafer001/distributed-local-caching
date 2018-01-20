@@ -1,6 +1,7 @@
 package com.pafer.distributed.local.cache.mq.client;
 
-import com.pafer.distributed.local.cache.mq.LocalCacheConsumer;
+import com.pafer.distributed.local.cache.lc.LocalCacheConfiguration;
+import com.pafer.distributed.local.cache.lc.LocalCacheHandler;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -11,6 +12,8 @@ public class ConsumerMessageClient extends AbstractMessageClient {
 
     protected int prefetchCount;
 
+    private LocalCacheHandler localCacheHandler;
+
     public int getPrefetchCount() {
         return prefetchCount;
     }
@@ -19,7 +22,10 @@ public class ConsumerMessageClient extends AbstractMessageClient {
         this.prefetchCount = prefetchCount;
     }
 
-    public ConsumerMessageClient() throws IOException{
+
+
+    public ConsumerMessageClient(LocalCacheHandler localCacheHandler,
+                                 LocalCacheClientConfiguration localCacheClientConfiguration) throws IOException{
 
         if (channel == null) {
             synchronized (this) {
@@ -28,6 +34,8 @@ public class ConsumerMessageClient extends AbstractMessageClient {
                 }
             }
         }
+
+        this.localCacheHandler = localCacheHandler;
     }
 
     public void consumer() throws IOException {
@@ -42,4 +50,23 @@ public class ConsumerMessageClient extends AbstractMessageClient {
         channel.queueBind(queueName, exchangeName, routingKey);
         channel.basicConsume(queueName, true, new LocalCacheConsumer(channel) );
     }
+
+
+    class LocalCacheConsumer extends DefaultConsumer {
+
+
+
+        public LocalCacheConsumer(Channel channel) {
+            super(channel);
+        }
+
+        @Override
+        public void handleDelivery(String consumerTag, Envelope envelope,
+                                   AMQP.BasicProperties properties, byte[] body) throws IOException {
+
+            String key = new String(body);
+            localCacheHandler.remove(key);
+        }
+    }
 }
+

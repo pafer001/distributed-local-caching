@@ -9,22 +9,13 @@ import com.google.common.base.Function;
  */
 public class LocalCacheHandler {
 
+    //cache own by LocalCacheHandler class
     private static LocalCache cache ;
 
-    private LocalCacheConfiguration cacheConfiguration;
-
-
-
-    public LocalCacheConfiguration getCacheConfiguration() {
-        return cacheConfiguration;
-    }
-
-    public void setCacheConfiguration(LocalCacheConfiguration cacheConfiguration) {
-        this.cacheConfiguration = cacheConfiguration;
+    public LocalCacheHandler() {
     }
 
     public LocalCacheHandler(LocalCacheConfiguration cacheConfiguration) {
-        this.cacheConfiguration = cacheConfiguration;
         cache = new LocalCache(cacheConfiguration.getCacheMaxSize(),
                 cacheConfiguration.getCacheExpireSecond(), cacheConfiguration.getCachePolicy());
     }

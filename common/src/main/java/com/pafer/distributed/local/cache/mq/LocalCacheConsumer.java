@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class LocalCacheConsumer extends DefaultConsumer {
 
-
     private LocalCacheHandler localCacheHandler = new LocalCacheHandler();
 
     public LocalCacheConsumer(Channel channel) {

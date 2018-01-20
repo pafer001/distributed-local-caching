@@ -19,6 +19,5 @@
 /.classpath
 /.settings
 /bin
-/LOG_FILE_IS_UNDEFINED/*
-/cluster-common/LOG_FILE_IS_UNDEFINED
-/LOG_FILE_IS_UNDEFINED
+
+

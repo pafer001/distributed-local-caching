@@ -1,6 +1,6 @@
 package com.pafer.distributed.local.cache.mq;
 
-import com.pafer.distributed.local.cache.LocalCacheHandler;
+import com.pafer.distributed.local.cache.lc.LocalCacheHandler;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;

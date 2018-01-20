@@ -1,4 +1,4 @@
-package com.pafer.distributed.local.cache;
+package com.pafer.distributed.local.cache.tools;
 
 /**
  * @author wangzhenya

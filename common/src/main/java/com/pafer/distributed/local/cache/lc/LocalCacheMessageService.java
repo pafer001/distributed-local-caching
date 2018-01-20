@@ -1,6 +1,6 @@
-package com.pafer.distributed.local.cache;
+package com.pafer.distributed.local.cache.lc;
 
-import com.pafer.distributed.local.cache.mq.ProductMessageClient;
+import com.pafer.distributed.local.cache.mq.client.ProductMessageClient;
 
 import java.io.IOException;
 

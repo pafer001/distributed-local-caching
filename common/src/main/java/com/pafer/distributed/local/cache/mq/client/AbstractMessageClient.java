@@ -1,4 +1,4 @@
-package com.pafer.distributed.local.cache.mq;
+package com.pafer.distributed.local.cache.mq.client;
 
 import com.rabbitmq.client.Address;
 import com.rabbitmq.client.Channel;
@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * @author wangzhenya
  */
-public abstract class MessageClient {
+public abstract class AbstractMessageClient {
 
     protected String user;
     protected String pwd;

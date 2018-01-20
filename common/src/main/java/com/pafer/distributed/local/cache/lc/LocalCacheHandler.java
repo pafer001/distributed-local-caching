@@ -1,4 +1,4 @@
-package com.pafer.distributed.local.cache;
+package com.pafer.distributed.local.cache.lc;
 
 import com.google.common.base.Function;
 
@@ -30,5 +30,9 @@ public class LocalCacheHandler {
             cache.put(key, o);
         }
         return o;
+    }
+
+    public Object getIfPresent(String key) {
+        return cache.get(key);
     }
 }

@@ -17,7 +17,7 @@ public abstract class AbstractMessageClient {
     protected String vHost;
     protected String queueName;
     protected String exchangeName = "lc-exchange";
-    protected String routingKey = "lc-rk";
+    protected String routingKey = "lc-routingKey";
     protected Address[] address;
 
     protected Connection createConnect() throws IOException {

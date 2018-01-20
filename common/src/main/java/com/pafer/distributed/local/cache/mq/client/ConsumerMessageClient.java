@@ -8,11 +8,12 @@ import java.io.IOException;
 public class ConsumerMessageClient extends AbstractMessageClient {
 
     private static Channel channel;
+
     protected int prefetchCount;
 
     public void consumer() throws IOException {
         if (channel == null) {
-            synchronized (channel) {
+            synchronized (this) {
                 if (channel == null) {
                     createChannel();
                 }

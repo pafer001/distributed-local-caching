@@ -29,7 +29,7 @@ public class ProductMessageClient extends AbstractMessageClient {
     public void sendMessage(Object object) throws IOException {
 
         if (channel == null) {
-            synchronized (channel) {
+            synchronized (this) {
                 if (channel == null) {
                     initProducer();
                 }

@@ -12,8 +12,6 @@ public class LocalCacheHandler {
     //cache own by LocalCacheHandler class
     private static LocalCache cache;
 
-    public LocalCacheHandler() {
-    }
 
     public LocalCacheHandler(LocalCacheConfiguration cacheConfiguration) {
         cache = new LocalCache(cacheConfiguration.getCacheMaxSize(),

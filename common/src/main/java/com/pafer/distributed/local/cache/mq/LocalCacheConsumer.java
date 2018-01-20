@@ -10,7 +10,10 @@ import java.io.IOException;
 
 public class LocalCacheConsumer extends DefaultConsumer {
 
-    private LocalCacheHandler localCacheHandler = new LocalCacheHandler();
+    /**
+     * // TODO: 18-1-20 set
+     */
+    private LocalCacheHandler localCacheHandler;
 
     public LocalCacheConsumer(Channel channel) {
         super(channel);

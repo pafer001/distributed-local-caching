@@ -49,9 +49,10 @@ public class ProductMessageClient extends AbstractMessageClient {
 
     /**
      * send delete lc message
+     *
      * @param key
      */
-    public void sendRemoveDataMessage(String key) throws IOException{
+    public void sendRemoveDataMessage(String key) throws IOException {
         sendMessage(key);
     }
 

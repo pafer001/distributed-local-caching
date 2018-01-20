@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class LocalCacheTest {
 
-    LocalCache<String, String> cache =  null;
+    LocalCache<String, String> cache = null;
 
     @Before
     public void init() {

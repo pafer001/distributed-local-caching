@@ -5,8 +5,10 @@ import com.pafer.distributed.local.cache.tools.DayTime;
 
 public class LocalCacheConfiguration {
 
-    private int cacheMaxSize = 12000;;
-    private long cacheExpireSecond = DayTime.HOUR;;
+    private int cacheMaxSize = 12000;
+    ;
+    private long cacheExpireSecond = DayTime.HOUR;
+    ;
     private int cachePolicy = 1;
 
     public int getCacheMaxSize() {

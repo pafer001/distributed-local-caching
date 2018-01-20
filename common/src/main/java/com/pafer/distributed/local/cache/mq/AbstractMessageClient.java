@@ -74,6 +74,6 @@ public abstract class AbstractMessageClient {
 
     protected Channel createChannel() throws IOException {
 
-       return createConnect().createChannel();
+        return createConnect().createChannel();
     }
 }

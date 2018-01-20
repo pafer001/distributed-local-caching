@@ -10,21 +10,19 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author wangzhenya
  * @param <V> value
+ * @author wangzhenya
  */
 public class LocalCache<String, V> {
-
-    /**
-     * cache max length
-     */
-    private int max = 12000;
 
     /**
      * cache store data
      */
     public Cache<String, V> cache;
-
+    /**
+     * cache max length
+     */
+    private int max = 12000;
     /**
      * every k-v expire after expireSecond;
      * default is one hour

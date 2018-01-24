@@ -16,10 +16,10 @@ public class ProductMessageClientTest {
     public void initProductMessageClient() throws IOException{
 
         LocalCacheClientConfiguration configuration = new LocalCacheClientConfiguration();
-        configuration.setAddress("test2.sns.sohuno.com:5672");
-        configuration.setvHost("/sns_dev");
-        configuration.setUser("sns");
-        configuration.setPwd("snstest");
+        configuration.setAddress("128.0.0.1:5672");
+        configuration.setvHost("/dev");
+        configuration.setUser("user");
+        configuration.setPwd("pwd");
         productMessageClient = new ProductMessageClient(configuration);
     }
 

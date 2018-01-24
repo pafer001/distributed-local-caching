@@ -1,7 +1,7 @@
 package com.pafer.distributed.local.cache.tools;
 
 /**
- * @author wangzhenya
+ * @author pafer
  */
 public interface DayTime {
 

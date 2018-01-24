@@ -13,7 +13,7 @@ import java.net.InetAddress;
 import java.util.concurrent.*;
 
 /**
- * @author wangzhenya
+ * @author pafer
  */
 public class ConsumerMessageClient extends AbstractMessageClient {
 

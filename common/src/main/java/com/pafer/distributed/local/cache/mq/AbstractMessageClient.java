@@ -9,7 +9,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.io.IOException;
 
 /**
- * @author wangzhenya
+ * @author pafer
  */
 public abstract class AbstractMessageClient {
 

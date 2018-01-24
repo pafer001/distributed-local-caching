@@ -1,7 +1,7 @@
 package com.pafer.distributed.local.cache.mq;
 
 /**
- * @author wangzhenya
+ * @author pafer
  */
 public class LocalCacheClientConfiguration {
 

@@ -5,7 +5,7 @@ import com.google.common.base.Function;
 /**
  * 查询的时候，才put
  *
- * @author wangzhenya
+ * @author pafer
  */
 public class LocalCacheHandler {
 

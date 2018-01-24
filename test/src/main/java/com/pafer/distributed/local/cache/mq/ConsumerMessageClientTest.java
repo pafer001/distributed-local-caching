@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 /**
- * @author wangzhenya
+ * @author pafer
  */
 public class ConsumerMessageClientTest {
 

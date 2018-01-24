@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.concurrent.*;
 
 /**
- * @author wangzhenya
+ * @author pafer
  */
 public class ProductMessageClient extends AbstractMessageClient {
 

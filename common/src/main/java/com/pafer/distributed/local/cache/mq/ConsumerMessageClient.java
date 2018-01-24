@@ -1,23 +1,51 @@
 package com.pafer.distributed.local.cache.mq;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.pafer.distributed.local.cache.lc.LocalCacheConfiguration;
 import com.pafer.distributed.local.cache.lc.LocalCacheHandler;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.util.concurrent.*;
 
+/**
+ * @author wangzhenya
+ */
 public class ConsumerMessageClient extends AbstractMessageClient {
 
     private static Channel channel;
 
-    protected int prefetchCount;
+    protected int qosCount;
 
-    private LocalCacheHandler localCacheHandler;
+    private static LocalCacheHandler localCacheHandler;
+    private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2,
+            5, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(1000),
+            Executors.defaultThreadFactory(), new RejectedExecutionHandler() {
+        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
 
-    public ConsumerMessageClient(LocalCacheHandler localCacheHandler,
-                                 LocalCacheClientConfiguration localCacheClientConfiguration) throws IOException {
+        }
+    }
+    );
+    public ConsumerMessageClient(LocalCacheConfiguration localCacheConfiguration,
+                                 LocalCacheClientConfiguration configuration) throws IOException {
+        if (configuration == null) {
+            throw new NullPointerException(" localCacheClientConfiguration is null");
+        }
+
+        String address = configuration.getAddress();
+        if (Strings.isNullOrEmpty(address)) {
+            throw new NullPointerException("localCacheClientConfiguration address is null");
+        }
+        this.user = configuration.getUser();
+        this.pwd = configuration.getPwd();
+        this.vHost = configuration.getvHost();
+        this.address = Address.parseAddresses(address);
+        this.queueName = Joiner.on("/").join(Lists.newArrayList(configuration.getQueueName(),
+                InetAddress.getLocalHost().getHostAddress().toString()));
+        this.qosCount = configuration.getQosCount();
 
         if (channel == null) {
             synchronized (this) {
@@ -27,15 +55,23 @@ public class ConsumerMessageClient extends AbstractMessageClient {
             }
         }
 
-        this.localCacheHandler = localCacheHandler;
+        if (localCacheHandler == null) {
+            synchronized (this) {
+                if (localCacheHandler == null) {
+                    localCacheHandler =  new LocalCacheHandler(localCacheConfiguration);
+                }
+            }
+        }
+
+
     }
 
-    public int getPrefetchCount() {
-        return prefetchCount;
+    public int getQosCount() {
+        return qosCount;
     }
 
-    public void setPrefetchCount(int prefetchCount) {
-        this.prefetchCount = prefetchCount;
+    public void setQosCount(int qosCount) {
+        this.qosCount = qosCount;
     }
 
     public void consumer() throws IOException {
@@ -46,7 +82,9 @@ public class ConsumerMessageClient extends AbstractMessageClient {
                 }
             }
         }
-        channel.basicQos(prefetchCount);
+
+        channel.basicQos(qosCount);
+        channel.queueDeclare(queueName, true, false, false, null);
         channel.queueBind(queueName, exchangeName, routingKey);
         channel.basicConsume(queueName, true, new LocalCacheConsumer(channel));
     }
@@ -59,10 +97,15 @@ public class ConsumerMessageClient extends AbstractMessageClient {
 
         @Override
         public void handleDelivery(String consumerTag, Envelope envelope,
-                                   AMQP.BasicProperties properties, byte[] body) throws IOException {
+                                   AMQP.BasicProperties properties, final byte[] body) throws IOException {
+            threadPoolExecutor.execute(new Runnable() {
+                public void run() {
+                    String key = new String(body);
+                    System.out.println("consumer---" + key);
+                    localCacheHandler.remove(key);
+                }
+            });
 
-            String key = new String(body);
-            localCacheHandler.remove(key);
         }
     }
 }

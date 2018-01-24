@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 和consumer存在的
  * @param <V> value
  * @author wangzhenya
  */

@@ -9,7 +9,6 @@ import com.google.common.base.Function;
  */
 public class LocalCacheHandler {
 
-    //cache own by LocalCacheHandler class
     private static LocalCache cache;
 
 

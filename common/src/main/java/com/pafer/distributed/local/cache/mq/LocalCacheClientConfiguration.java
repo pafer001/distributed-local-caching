@@ -1,13 +1,17 @@
 package com.pafer.distributed.local.cache.mq;
 
+/**
+ * @author wangzhenya
+ */
 public class LocalCacheClientConfiguration {
 
-    protected String user;
-    protected String pwd;
-    protected String vHost;
-    protected String queueName;
-    protected String address;
-    protected int prefetchCount;
+    private String user;
+    private String pwd;
+    private String vHost;
+    private String queueName;
+    private String address;
+    //consumer 需要
+    private int qosCount = 5;
 
     public String getUser() {
         return user;
@@ -49,11 +53,11 @@ public class LocalCacheClientConfiguration {
         this.address = address;
     }
 
-    public int getPrefetchCount() {
-        return prefetchCount;
+    public int getQosCount() {
+        return qosCount;
     }
 
-    public void setPrefetchCount(int prefetchCount) {
-        this.prefetchCount = prefetchCount;
+    public void setQosCount(int qosCount) {
+        this.qosCount = qosCount;
     }
 }

@@ -1,5 +1,6 @@
 package com.pafer.distributed.local.cache.mq;
 
+import com.google.common.base.Strings;
 import com.rabbitmq.client.Address;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -76,4 +77,6 @@ public abstract class AbstractMessageClient {
 
         return createConnect().createChannel();
     }
+
+
 }

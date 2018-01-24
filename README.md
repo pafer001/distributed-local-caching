@@ -8,8 +8,12 @@
 ![结构图](https://github.com/pafer001/distributed-local-caching/blob/master/doc/flow.png)
 
 note:
-1:生产者可能是消费者
-2：消息是通过Fanout exchange实现广播的
+* 生产者可能是消费者
+* 消息是通过Fanout exchange实现广播的
+* 数据的存储通过guava的cache实现的
+
+##使用
+
 
 
 

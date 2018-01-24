@@ -7,7 +7,9 @@
 ## 实现原理
 ![结构图](https://github.com/pafer001/distributed-local-caching/blob/master/doc/flow.png)
 
-
+note:
+1:生产者可能是消费者
+2：消息是通过Fanout exchange实现广播的
 
 
 

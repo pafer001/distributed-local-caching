@@ -12,7 +12,7 @@ note:
 * 消息是通过Fanout exchange实现广播的
 * 数据的存储通过guava的cache实现的
 
-##使用
+## 例子
 
 
 

@@ -5,6 +5,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.pafer.distributed.local.cache.lc.LocalCacheConfiguration;
 import com.pafer.distributed.local.cache.lc.LocalCacheHandler;
+import com.pafer.distributed.local.cache.tools.DateUtilTool;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -43,8 +44,8 @@ public class ConsumerMessageClient extends AbstractMessageClient {
         this.pwd = configuration.getPwd();
         this.vHost = configuration.getvHost();
         this.address = Address.parseAddresses(address);
-        this.queueName = Joiner.on("/").join(Lists.newArrayList(configuration.getQueueName(),
-                InetAddress.getLocalHost().getHostAddress().toString()));
+        this.queueName = Joiner.on("-").join(Lists.newArrayList(configuration.getQueueName(),
+                InetAddress.getLocalHost().getHostAddress().toString(), DateUtilTool.getToday()));
         this.qosCount = configuration.getQosCount();
 
         if (channel == null) {
@@ -84,7 +85,7 @@ public class ConsumerMessageClient extends AbstractMessageClient {
         }
 
         channel.basicQos(qosCount);
-        channel.queueDeclare(queueName, true, false, false, null);
+        channel.queueDeclare(queueName, true, false, true, null);
         channel.queueBind(queueName, exchangeName, routingKey);
         channel.basicConsume(queueName, true, new LocalCacheConsumer(channel));
     }

@@ -56,7 +56,6 @@ note:
     @Test
     public void testConsumer() throws IOException {
 
-
         consumerMessageClient.consumer();
 
         try {

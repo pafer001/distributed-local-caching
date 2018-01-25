@@ -15,8 +15,8 @@ note:
 ## 例子
 
 ### 生产者：
-'''java
- @Before
+ ``` java
+    @Before
     public void initProductMessageClient() throws IOException{
 
         LocalCacheClientConfiguration configuration = new LocalCacheClientConfiguration();
@@ -34,10 +34,10 @@ note:
             productMessageClient.sendRemoveDataMessage("111");
         }
     }
-'''
+ ```
 
 ### 消费者：
-'''java
+ ``` java
 
  @Before
     public void initProductMessageClient() throws IOException {
@@ -65,7 +65,7 @@ note:
             e.printStackTrace();
         }
     }
-'''
+ ```
 
 
 

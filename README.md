@@ -14,7 +14,58 @@ note:
 
 ## 例子
 
+### 生产者：
+'''java
+ @Before
+    public void initProductMessageClient() throws IOException{
 
+        LocalCacheClientConfiguration configuration = new LocalCacheClientConfiguration();
+        configuration.setAddress("128.0.0.1:5672");
+        configuration.setvHost("/dev");
+        configuration.setUser("user");
+        configuration.setPwd("pwd");
+        productMessageClient = new ProductMessageClient(configuration);
+    }
+
+    @Test
+    public void testSendRemoveDataMessage() throws IOException {
+
+        while (true) {
+            productMessageClient.sendRemoveDataMessage("111");
+        }
+    }
+'''
+
+### 消费者：
+'''java
+
+ @Before
+    public void initProductMessageClient() throws IOException {
+
+        LocalCacheClientConfiguration configuration = new LocalCacheClientConfiguration();
+        configuration.setAddress("128.0.0.1:5672");
+        configuration.setvHost("/dev");
+        configuration.setUser("user");
+        configuration.setPwd("pwd");
+        configuration.setQueueName("lc-queue");
+        configuration.setQosCount(5);
+
+        consumerMessageClient = new ConsumerMessageClient(new LocalCacheConfiguration(), configuration);
+    }
+
+    @Test
+    public void testConsumer() throws IOException {
+
+
+        consumerMessageClient.consumer();
+
+        try {
+            Thread.sleep(10000000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+'''
 
 
 
